@@ -80,8 +80,8 @@ export default function Home() {
 
           <input type="text" name="lection" onChange={handleChangeForm} placeholder="Nome lezione" className="border-1 rounded border-gray-300 p-2 px-4" required />
 
-          <input type="time" name="startTime" onChange={handleChangeForm} className="border-1 rounded border-gray-300 p-2 px-4" required />
-          <input type="time" name="endTime" onChange={handleChangeForm} className="border-1 rounded border-gray-300 p-2 px-4" required />
+          <input type="time" name="startTime" onChange={handleChangeForm} className="border-1 rounded border-gray-300 p-2 px-4 w-full" required />
+          <input type="time" name="endTime" onChange={handleChangeForm} className="border-1 rounded border-gray-300 p-2 px-4 w-full" required />
 
           <textarea name="description" onChange={handleChangeForm} className="w-full border-1 border-gray-300 h-30 resize-none rounded p-2 px-4" placeholder="descrizione"></textarea>
           <input type="text" name="class" onChange={handleChangeForm} placeholder="Aula" className="border-1 border-gray-300 rounded p-2 px-4" required />

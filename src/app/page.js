@@ -11,6 +11,7 @@ export default function Home() {
 
   const [lezioni, setLezioni] = useState([]);
   const [task, setTask] = useState({
+    id: null,
     dayWeek: '',
     lection: '',
     startTime: null,
@@ -20,6 +21,7 @@ export default function Home() {
     professor: ''
   })
 
+
   const handleCloseModal = () => setIsModalOpen(false);
   const handleOpenModal = () => setIsModalOpen(true)
   const handleChangeForm = (e) => {
@@ -27,12 +29,24 @@ export default function Home() {
     setTask(prevState => ({ ...prevState, [name]: value }))
   }
 
+  const handleRemove = (id) => {
+    const newLezioni = lezioni.filter((lezione) => lezione.id !== id);
+
+    setLezioni(newLezioni)
+    localStorage.setItem('lezioni', JSON.stringify(newLezioni));
+  }
+
   const handleForm = (e) => {
     e.preventDefault();
-
     const savedLezioni = localStorage.getItem('lezioni')
     const lezioniEsistenti = savedLezioni ? JSON.parse(savedLezioni) : [];
-    const newLezioni = [...lezioniEsistenti, task];
+
+    const nuovaLezioneId = {
+      ...task,
+      id: Date.now()
+    }
+
+    const newLezioni = [...lezioniEsistenti, nuovaLezioneId];
     localStorage.setItem('lezioni', JSON.stringify(newLezioni));
 
     setLezioni(newLezioni);
@@ -64,7 +78,7 @@ export default function Home() {
   return (
     <>
       <Calendar setGiornoSelezionato={setGiornoSelezionato} giornoSelezionato={giornoSelezionato} />
-      <Tasks data={lezioniFiltrate} />
+      <Tasks data={lezioniFiltrate} onRemove={handleRemove} />
       <Bottom handleOpenModal={handleOpenModal} />
       <Modal isOpen={isModalOpen} close={handleCloseModal}>
         <form className="flex flex-col gap-5" method="post" onSubmit={handleForm}>

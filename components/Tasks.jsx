@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 
 
-const Tasks = ({data}) => {
+const Tasks = ({data, onRemove}) => {
 
 
     return (
@@ -20,6 +20,10 @@ const Tasks = ({data}) => {
                         </div>
                         <p className='text-gray-900'>{lezione.description || `lezione di ${lezione.lection}`}</p>
                         <span className='flex items-end font text-sm mt-3 italic'>{lezione.professor}</span>
+                        <div className='flex justify-end mt-2'>
+                            <button onClick={() => onRemove(lezione.id)} className='p-1 border-1 px-3 bg-white text-sm rounded'>Elimina</button>
+
+                        </div>
                     </div>
                     
                 )): 'cane'}
